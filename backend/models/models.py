@@ -4,11 +4,12 @@ from datetime import datetime
 metaData = MetaData()
 
 roles = Table(
-    "roles", 
+    "discipline", 
     metaData,
-    Column("id", Integer, primary_key=True),
-    Column("name", String, nullable=False),
-    Column("permissions", JSON),
+    Column("user_id", Integer, ForeignKey("users.id")),
+    Column("disc_name", String, nullable=False),
+    Column("video_path", String, nullable=True),
+    Column("img_path", String, nullable=True),
 )
 
 users = Table(
@@ -16,8 +17,9 @@ users = Table(
     metaData,
     Column("id", Integer, primary_key=True),
     Column("email", String, nullable=False),
-    Column("username", String, nullable=False),
-    Column("password", String, nullable=False),
-    Column("reqistered_at", TIMESTAMP, default=datetime.utcnow),
-    Column("role_id", Integer, ForeignKey("roles.id")),
+    Column("first_name", String, nullable=False),
+    Column("last_name", String, nullable=False),
+    Column("patronymic", String, nullable=True),
+    Column("Phone", String, nullable=False),
+    Column("reqistered_time", TIMESTAMP, default=datetime.utcnow),
 )
