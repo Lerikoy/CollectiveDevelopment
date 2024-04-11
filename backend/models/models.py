@@ -1,15 +1,33 @@
-from sqlalchemy import MetaData, Integer, String, TIMESTAMP, ForeignKey, Table, Column, JSON
+from sqlalchemy import MetaData, Integer, String, TIMESTAMP, ForeignKey, Table, Column, Date, Boolean
 from datetime import datetime
 
 metaData = MetaData()
 
-roles = Table(
-    "discipline", 
+cosplays = Table(
+    "cosplay", 
     metaData,
+    Column("id", Integer, primary_key=True),
     Column("user_id", Integer, ForeignKey("users.id")),
-    Column("disc_name", String, nullable=False),
-    Column("video_path", String, nullable=True),
-    Column("img_path", String, nullable=True),
+    Column("fandom", String, nullable=True),
+    Column("name_character", String, nullable=False),
+)
+
+stories = Table(
+    "story", 
+    metaData,
+    Column("id", Integer, primary_key=True),
+    Column("user_id", Integer, ForeignKey("users.id")),
+    Column("name", String, nullable=True),
+    Column("path_file", String, nullable=False),
+)
+
+pictures = Table(
+    "picture", 
+    metaData,
+    Column("id", Integer, primary_key=True),
+    Column("user_id", Integer, ForeignKey("users.id")),
+    Column("name", String, nullable=True),
+    Column("path_img", String, nullable=False),
 )
 
 users = Table(
@@ -22,4 +40,9 @@ users = Table(
     Column("patronymic", String, nullable=True),
     Column("Phone", String, nullable=False),
     Column("reqistered_time", TIMESTAMP, default=datetime.utcnow),
+    Column("date_of_birth", Date, nullable=False),
+    Column("cosplay", Boolean, default=False),
+    Column("story", Boolean, default=False),
+    Column("picture", Boolean, default=False),
+    Column("consent_to_processing", Boolean, default=False),
 )
