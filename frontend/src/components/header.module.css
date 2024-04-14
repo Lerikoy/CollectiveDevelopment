@@ -1,0 +1,54 @@
+.div,
+.logoIcon {
+  position: relative;
+
+}
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+.div,
+.text {
+  line-height: 125%;
+  font-weight: 600;
+}
+
+.text{
+  padding-left: 3rem;
+}
+
+.menu {
+  justify-content: space-between;
+  
+}
+.button,
+.header,
+.menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.button {
+  border-radius: var(--br-mini);
+  background-color: var(--color1);
+  justify-content: flex-end;
+  padding: var(--padding-3xs) var(--padding-6xl);
+  cursor: pointer;
+  color: var(--color-whitesmoke-100);
+}
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-100);
+  width: 100vw;
+  overflow: hidden;
+  justify-content: space-between;
+  padding: var(--padding-mini) var(--padding-21xl);
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-whitesmoke-200);
+  font-family: var(--font-montserrat);
+}
