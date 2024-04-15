@@ -24,13 +24,10 @@ const HomePage: FunctionComponent = () => {
                 <div className={styles.lineChild} />
             </div>
             <div className={styles.div2024}>
-                <p className={styles.p}>2024</p>
-                <p className={styles.p}>2024</p>
-                <p className={styles.p}>2024</p>
-                <p className={styles.p}>2024</p>
-                <p className={styles.p}>2024</p>
+                <p className={styles.p}>2024<br/>2024<br/>2024<br/>2024<br/>2024</p>
             </div>
             <img className={styles.ellipse1} alt="" src="/ellipse1.svg" />
+            <img className={styles.ellipse2} alt="" src="/ellipse2.svg" />
             <img className={styles.image} alt="" src="/main_image.png" />
             <div className={styles.title}>
                 <b className={styles.b1}>ФЕСТИВАЛЬ</b>
@@ -84,7 +81,7 @@ const HomePage: FunctionComponent = () => {
 
             <b className={styles.festival}>FESTIVAL</b>
             <b className={styles.geek}>GEEK</b>
-
+            <div className={styles.competitionsTitle}>КОНКУРСЫ ФЕСТИВАЛЯ</div>
             <div className={styles.competitionsBlock}>
                 <Competitions
                     cover="/cover_cosplay.jpg"
@@ -108,6 +105,18 @@ const HomePage: FunctionComponent = () => {
                     // onFrameContainer13Click={onFrameContainer13Click}
                 />
             </div>
+            <div className={styles.galleryTitle}>
+                <p className={styles.p}>УЧАСТНИКИ <br />КОНКУРСА РИСУНКОВ</p>
+            </div>
+            
+            {/* <div className={styles.galleryParent}>
+                <div className={styles.slider}>
+                    <div className={styles.slideTrack}>
+                        
+                        <img className={styles.slides} src="/picture/Rectangle 1.jpg"/>
+                    </div>
+                </div>
+            </div> */}
 
         </div>
     );

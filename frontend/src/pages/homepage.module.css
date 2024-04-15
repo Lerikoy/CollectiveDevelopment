@@ -28,6 +28,14 @@
   left: 47vw ;
   width: 50rem;
 }
+.ellipse2
+{
+  position: absolute;
+  top:80px;
+  left: 0vw;
+  /* width: 40rem; */
+  height: 70vh; 
+}
 .image{
   position: absolute;
   top: 230px;
@@ -155,21 +163,21 @@
 .festival,
 .geek {
   position: absolute;
-  font-size: 240px;
+  font-size: 250px;
   color: var(--color-whitesmoke-100);
   text-shadow: 2px 0 0#e1e1e1, 0 2px 0#e1e1e1, -2px 0 0#e1e1e1, 0-2px 0#e1e1e1;
 
 }
+.geek {
+  top: 85vh;
+  left: 10vw;
+  line-height: 84%;
+}
 .festival {
-  top: 1120px;
+  top: 122.5vh;
   right: 10vw;
   line-height: 84%;
   display: inline-block;
-}
-.geek {
-  top: 800px;
-  left: 10vw;
-  line-height: 84%;
 }
 
 
@@ -182,5 +190,21 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-xl);
+}
+.competitionsTitle{
+  top: 45vh;
+  position: relative;
+  line-height: 84%;
+  font-weight: 600;
+}
+
+
+
+/* Gallery */
+.galleryTitle {
+  position: relative;
+  top: 65vh;
+  line-height: 100%;
+  font-weight: 600;
 }
 
