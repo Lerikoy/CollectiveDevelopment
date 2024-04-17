@@ -4,3 +4,4 @@ sqlalchemy
 aiosqlite
 alembic
 psycopg2
+asyncpg
