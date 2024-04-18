@@ -1,10 +1,10 @@
 from typing import AsyncGenerator
 from datetime import datetime
 from fastapi import Depends
-from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP, Date, create_engine
+from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP, Date, create_engine, ForeignKey
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
@@ -26,7 +26,40 @@ class User(Base):
     Phone: str = Column(String, nullable=False)
     reqistered_time: datetime = Column(TIMESTAMP, default=datetime.now)
     date_of_birth: datetime = Column(Date, nullable=False)
-    cosplay: bool = Column(Boolean, default=False)
-    story: bool = Column(Boolean, default=False)
-    picture: bool = Column(Boolean, default=False)
     consent_to_processing: bool = Column(Boolean, default=False)
+
+    cosplay = relationship("Cosplay", back_populates="owner")
+    story = relationship("Story", back_populates="owner")
+    picture = relationship("Picture", back_populates="owner")
+
+
+class Cosplay(Base):
+    __tablename__ = "cosplay"
+
+    id: int = Column(Integer, primary_key=True)
+    user_id: int = Column(Integer, ForeignKey("users.id"))
+    fandom: str = Column(String, nullable=True)
+    name_character: str = Column(String, nullable=False)
+
+    owner = relationship("User", back_populates="cosplay")
+
+
+class Story(Base):
+    __tablename__ = "story"
+    id: int = Column(Integer, primary_key=True)
+    user_id: int = Column(Integer, ForeignKey("users.id"))
+    name: str = Column(String, nullable=True)
+    path_file: str = Column(String, nullable=False)
+
+    owner = relationship("User", back_populates="story")
+
+
+class Picture(Base):
+    __tablename__ = "picture"
+
+    id: int = Column(Integer, primary_key=True)
+    user_id: int = Column(Integer, ForeignKey("users.id"))
+    name: str = Column(String, nullable=True)
+    path_img: str = Column(String, nullable=False)
+
+    owner = relationship("User", back_populates="picture")
