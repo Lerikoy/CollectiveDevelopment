@@ -41,8 +41,5 @@ users = Table(
     Column("Phone", String, nullable=False),
     Column("reqistered_time", TIMESTAMP, default=datetime.utcnow),
     Column("date_of_birth", Date, nullable=False),
-    Column("cosplay", Boolean, default=False),
-    Column("story", Boolean, default=False),
-    Column("picture", Boolean, default=False),
     Column("consent_to_processing", Boolean, default=False),
 )
