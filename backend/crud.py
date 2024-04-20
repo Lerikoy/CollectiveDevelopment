@@ -34,20 +34,20 @@ def create_user_cosplay(db: Session, user: UserCreate, cosplay: CosplayCreate):
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
-    return db_item
+    return db_user
 
 
 def create_user_picture(db: Session, user: UserCreate, picture: PictureCreate):
-    db_user = User(**user.dict())
+    db_user = User(**user)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
 
-    db_item = Picture(**picture.dict(), user_id=db_user.id)
+    db_item = Picture(**picture, user_id=db_user.id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
-    return db_item
+    return db_user
 
 def create_user_story(db: Session, user: UserCreate, story: StoryCreate):
     db_user = User(**user.dict())
@@ -59,7 +59,7 @@ def create_user_story(db: Session, user: UserCreate, story: StoryCreate):
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
-    return db_item
+    return db_user
 
 
 def get_cosplay(db: Session, skip: int = 0, limit: int = 100):

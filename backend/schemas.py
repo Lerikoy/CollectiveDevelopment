@@ -22,11 +22,11 @@ class Cosplay(CosplayBase):
 
 class PictureBase(BaseModel):
     name: str
-    path_file: str
+    
 
 
 class PictureCreate(PictureBase):
-    pass
+    path_file: str
 
 
 class Picture(PictureBase):
