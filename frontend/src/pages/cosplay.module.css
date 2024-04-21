@@ -4,7 +4,7 @@
     background-color: var(--color-whitesmoke-100);
     height: 2438px;
     overflow: hidden;
-    /* text-align: left; */
+    text-align: left;
     /* font-size: var(--font-size-29xl); */
     color: var(--color-gray-200);
     font-family: var(--font-montserrat);
@@ -13,29 +13,99 @@
     padding-right: 10vw;
   }
 
-/* Background Lines */
-.lineParent {
-    position: absolute;
-    top: 70px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  .lineChild {
-    width: 1px;
-    border-right: 1px solid var(--color-gainsboro-200);
-    box-sizing: border-box;
-    height: 2438px;
-  }
+/* Title */
+.title{
+  height: 12vh;
+  padding-top: 10vh;
+  text-align: center;
+  font-size: var(--font-size-17xl);
+  color: var(--color-gray-200);
+}
+
+.title p{
+  font-size: var(--font-size-xl);
+}
 
 
 /* Forms */
-.form {
-    width: 100%;
-    max-width: 400px;
-    padding: 50px;
-    border-radius: 10px;
-    background-color: #fff;
+.formPersonalData {
+  width: 70vw;
+  padding: 0 5vw;
+  /* background-color: #fff; */
+  display: flex; 
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 400px;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 60px;
+}
+.formDetails{
+  width: 70vw;
+  padding: 0 5vw;
+  display: flex; 
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 140px;
+  /* background-color: #fff; */
+  padding-bottom: 60px;
+}
+
+
+/* Section */
+.section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-6xl);
+  height: 15vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 3vh;
+}
+
+.numberParent{
+  width: 35px;
+  position: relative;
+  height: 35px;
+}
+
+.circle{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-darkgray);
+  box-sizing: border-box;
+}
+
+.num{
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  line-height: 125%;
+  font-weight: 600;
+}
+
+.sectionText{
+  position: relative;
+  line-height: 125%;
+  font-weight: 600;
+  color: var(--color-darkgray);
+  text-align: left;
+}
+
+.line{
+  width: 100px;
+  position: relative;
+  border-top: 2px solid var(--color-darkgray);
+  box-sizing: border-box;
+  height: 1px;
 }

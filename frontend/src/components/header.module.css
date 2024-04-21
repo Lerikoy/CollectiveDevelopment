@@ -22,21 +22,13 @@
   justify-content: space-between;
   
 }
-.button,
 .header,
 .menu {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.button {
-  border-radius: var(--br-mini);
-  background-color: var(--color1);
-  justify-content: flex-end;
-  padding: var(--padding-3xs) var(--padding-6xl);
-  cursor: pointer;
-  color: var(--color-whitesmoke-100);
-}
+
 .header {
   position: absolute;
   top: 0;
