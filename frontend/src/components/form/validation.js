@@ -53,6 +53,9 @@ const character = Yup.string()
     .matches(regx.details, "Кириллица или латинница от 2 до 20 знаков")
     .required("Введите имя персонажа");
 
+const checkbox = Yup.boolean()
+.oneOf([true], "Это поле обязательно");
+
 export const schemas = {
     custom: Yup.object().shape({
         firstName,
@@ -62,7 +65,8 @@ export const schemas = {
         birthDate,
         phone,
         fandom,
-        character
+        character,
+        checkbox,
     }),
 };
 
@@ -75,4 +79,5 @@ export const initialValues = {
     phone: "+7",
     fandom: "",
     character: "",
+    checkbox: false,
 };
