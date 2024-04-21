@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { initialValues, schemas } from "../components/form/validation.js";
 import { Input } from "../components/form/input";
 import { Button } from "../components/form/button";
-
+import { Checkbox } from "../components/form/checkbox";
 
 export const Cosplay = () => {
     return(
@@ -19,15 +19,7 @@ export const Cosplay = () => {
    
             <Formik
                 initialValues={initialValues} 
-                // две фигурные кавычки и чекбокс
                 validationSchema={schemas.custom}
-                // validate={(values) => {
-                //     const errors = {};
-                //     if (!values.checkbox) {
-                //       errors.checkbox = 'Это поле обязательно';
-                //     }
-                //     return errors;
-                //   }}
                 onSubmit={() => console.log("Success")} //отправка на сервер
             >
                 <Form >
@@ -145,11 +137,12 @@ export const Cosplay = () => {
                         <div className={styles.sectionText}>Согласие на обработку</div>
                     </div>
 
-                    {/* <div>
-                        <Field type="checkbox" name="checkbox" />
-                        <label htmlFor="checkbox">Checkbox Label</label>
-                        <ErrorMessage name="checkbox" component="div" />
-                    </div> */}
+                    <Checkbox
+                        id="checkbox"
+                        label="Я даю согласие на обработку персональных данных и принимаю положение конкурса YKT GEEK FEST"
+                        name="checkbox"
+                        ></Checkbox>
+
                     <Button>Отправить</Button>
                 </Form>
                     
