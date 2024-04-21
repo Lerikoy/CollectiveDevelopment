@@ -26,7 +26,7 @@ class PictureBase(BaseModel):
 
 
 class PictureCreate(PictureBase):
-    path_file: str
+    path_img: str
 
 
 class Picture(PictureBase):
@@ -39,7 +39,7 @@ class Picture(PictureBase):
 
 class StoryBase(BaseModel):
     name: str
-    path_img: str
+    path_file: str
 
 
 class StoryCreate(StoryBase):
@@ -71,9 +71,6 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    cosplay: list[Cosplay] = []
-    picture: list[Picture] = []
-    story: list[Story] = []
 
     class Config:
         orm_mode = True
