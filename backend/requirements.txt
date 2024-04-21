@@ -5,3 +5,5 @@ aiosqlite
 alembic
 psycopg2
 asyncpg
+aiofiles
+python-multipart

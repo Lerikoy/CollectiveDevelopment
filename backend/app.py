@@ -1,10 +1,15 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
 
 from crud import (get_user, get_user_by_email, get_users, create_user_cosplay, create_user_picture, create_user_story,       
                   get_cosplay, get_picture, get_story)
 from schemas import UserCreate, UserBase, CosplayBase, CosplayCreate, StoryBase, StoryCreate, PictureBase, PictureCreate
 from database import local_session_maker
+
+import aiofiles
+import json
+from pathlib import Path
+from typing import Union
 
 app = FastAPI()
 
@@ -31,15 +36,30 @@ def create_cosplay(user: UserCreate, cosplay: CosplayCreate, db: Session = Depen
 
 
 @app.post("/picture/", response_model=UserBase)
-def create_cosplay(user: UserCreate, picture: PictureCreate, db: Session = Depends(get_db)):
-    db_user = get_user_by_email(db, email=user.email)
+async def create_picture(user_and_picture: Union[dict, str], file: UploadFile = File(...), db: Session = Depends(get_db)):
+    if isinstance(user_and_picture, str):
+        user_and_picture = json.loads(user_and_picture)
+
+    user_data = user_and_picture.get("user")
+    picture_data = user_and_picture.get("picture")
+    if not user_data or not picture_data:
+        raise HTTPException(status_code=400, detail="User data and picture data are required")
+
+    db_user = get_user_by_email(db, email=user_data.get("email"))
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-    return create_user_picture(db=db, user=user, picture=picture)
+    
+    out_file_path = Path("picture") / file.filename
+
+    async with aiofiles.open(out_file_path, 'wb') as out_file:
+        content = await file.read()  # async read
+        await out_file.write(content)  # async write
+    picture_data["path_img"] = str(out_file_path)
+    return create_user_picture(db=db, user=user_data, picture=picture_data)
 
 
 @app.post("/story/", response_model=UserBase)
-def create_cosplay(user: UserCreate, story: StoryCreate, db: Session = Depends(get_db)):
+def create_story(user: UserCreate, story: StoryCreate, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
