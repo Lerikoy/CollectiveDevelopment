@@ -27,9 +27,7 @@ const Header: FunctionComponent<HeaderType> = ({
         <div className={styles.text}>Конкурс рисунков</div>
         <div className={styles.text}>Аллея авторов</div>
       </div>
-      <div className={styles.button} onClick={onButtonContainerClick}>
-        <div className={styles.div}>Заявка на косплей</div>
-      </div>
+
     </div>
   );
 };
