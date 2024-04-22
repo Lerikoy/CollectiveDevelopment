@@ -15,6 +15,13 @@ Base: DeclarativeMeta = declarative_base()
 engine = create_engine(DATABASE_URL)
 local_session_maker = sessionmaker(engine, expire_on_commit=False)
 
+def get_db():
+    db = local_session_maker()
+    try:
+        yield db
+    finally:
+        db.close()
+
 class User(Base):
     __tablename__ = "users"
 

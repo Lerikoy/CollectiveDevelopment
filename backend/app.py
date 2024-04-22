@@ -6,7 +6,7 @@ from crud import (get_user, get_user_by_email, get_users, create_user_cosplay, c
                   get_cosplay, get_picture, get_story, get_user_by_cosplay, get_user_by_picture, get_user_by_story,
                   create_only_cosplay, create_only_picture, create_only_story)
 from schemas import UserCreate, UserBase, CosplayBase, CosplayCreate, StoryBase, PictureBase
-from database import local_session_maker
+from database import get_db
 
 import aiofiles
 import json
@@ -19,14 +19,6 @@ app = FastAPI()
 @app.get("/")
 async def get_home():
     return {"data": "Hello world!"}
-
-
-def get_db():
-    db = local_session_maker()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.post("/cosplay/", response_model=Union[UserBase, CosplayBase])
