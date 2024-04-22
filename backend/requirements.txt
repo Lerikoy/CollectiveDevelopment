@@ -1,9 +1,8 @@
-fastapi
-uvicorn
-sqlalchemy
-aiosqlite
-alembic
-psycopg2
-asyncpg
-aiofiles
-python-multipart
+fastapi==0.109.2
+uvicorn==0.27.1
+sqlalchemy==2.0.27
+alembic==1.13.1
+psycopg2==2.9.9
+asyncpg==0.29.0
+aiofiles==23.2.1
+python-multipart==0.0.9
