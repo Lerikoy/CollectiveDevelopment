@@ -10,7 +10,7 @@ export type CompetitionsType = {
   button?: CSSProperties["alignSelf"];
 
   /** Action props */
-  onFrameContainer13Click?: () => void;
+  buttonClick?: () => void;
 };
 
 const Competitions: FunctionComponent<CompetitionsType> = ({
@@ -18,7 +18,7 @@ const Competitions: FunctionComponent<CompetitionsType> = ({
   title,
   desc,
   button,
-  onFrameContainer13Click,
+  buttonClick,
 }) => {
   const buttonStyle: CSSProperties = useMemo(() => {
     return {
@@ -38,7 +38,7 @@ const Competitions: FunctionComponent<CompetitionsType> = ({
       </div>
       <div
         className={styles.button}
-        onClick={onFrameContainer13Click}
+        onClick={buttonClick}
         style={buttonStyle}
         >
             <div className={styles.buttonText}>Подать заявку</div>

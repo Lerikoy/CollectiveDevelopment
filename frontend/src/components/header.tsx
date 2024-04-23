@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo, type CSSProperties } from "react";
+import { FunctionComponent, useMemo, useState, type CSSProperties } from "react";
 import styles from "./header.module.css";
 
 export type HeaderType = {
@@ -13,21 +13,31 @@ const Header: FunctionComponent<HeaderType> = ({
   propGap,
   onButtonContainerClick,
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
   const menuStyle: CSSProperties = useMemo(() => {
     return {
       gap: propGap,
     };
   }, [propGap]);
+   
+  const whatsappNumber = "+79142700837";
 
   return (
     <div className={styles.header}>
       <div className={styles.menu} style={menuStyle}>
         <img className={styles.logoIcon} alt="" src="logo.png" />
-        <div className={styles.text}>Косплей</div>
-        <div className={styles.text}>Конкурс рисунков</div>
-        <div className={styles.text}>Аллея авторов</div>
+        <a className={styles.text} href="/">Главная</a>
+        <a className={styles.text} href="/cosplay">Подать заявку на косплей</a>
+        <a
+          className={styles.text}
+          href={`https://wa.me/${whatsappNumber}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Связаться с нами
+        </a>
       </div>
-
     </div>
   );
 };

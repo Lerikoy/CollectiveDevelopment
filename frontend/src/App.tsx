@@ -9,6 +9,8 @@ import {
 import './App.css';
 import HomePage from './pages/homepage';
 import Cosplay from "./pages/cosplay";
+import Art from "./pages/art";
+import Write from "./pages/write";
 
 function App() {
   const action = useNavigationType();
@@ -30,22 +32,18 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      // case "/art":
-      //   title = "";
-      //   metaDescription = "";
-      //   break;
+      case "/art":
+        title = "";
+        metaDescription = "";
+        break;
       case "/cosplay":
         title = "";
         metaDescription = "";
         break;
-      // case "/writer":
-      //   title = "";
-      //   metaDescription = "";
-      //   break;
-      // case "/2":
-      //   title = "";
-      //   metaDescription = "";
-      //   break;
+      case "/write":
+        title = "";
+        metaDescription = "";
+        break;
     }
 
     if (title) {
@@ -67,10 +65,8 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/cosplay" element={<Cosplay />} />
-      {/* <Route path="/art" element={<Art />} />
-      <Route path="/cosplay" element={<Cosplay />} />
-      <Route path="/writer" element={<Writer />} />
-      <Route path="/2" element={<Frame11 />} /> */}
+       <Route path="/art" element={<Art />} />
+       <Route path="/write" element={<Write />} />
     </Routes>
   );
 }

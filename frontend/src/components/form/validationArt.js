@@ -1,14 +1,13 @@
 import * as Yup from "yup";
 import parse from "date-fns/parse";
 
+
 const regx = {
     name: /^[а-яА-Яa-zA-Z]{2,20}$/,
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/,
     birthDate: /^([0-9]{2}).([0-9]{2}).([0-9]{4})$/,
     phone: /^(\+7)[0-9]{10}$/,
     details: /^([\w\d\s]{2,20})|([\d\s\u0400-\u04FF]{2,20})$/,
-
-    // details: /^[а-яА-Яa-zA-Z0-9_.+-/*]{2,20}$/,
 };
 
 const firstName = Yup.string()
@@ -22,7 +21,7 @@ const lastName = Yup.string()
 const surName = Yup.string()
     .matches(regx.name, "Кириллица и латинница от 2 до 20 знаков")
     .nullable()
-    .required();
+    // .required("Введите отчество");
 
 const email = Yup.string()
     .matches(regx.email, "Формат example@mail.com")
@@ -45,28 +44,43 @@ const phone = Yup.string()
     .required("Введите номер телефона");
 
 
-const fandom = Yup.string()
-    .matches(regx.details, "Кириллица или латинница от 2 до 20 знаков")
-    .required("Введите фандом");
 
-const character = Yup.string()
+
+const art = Yup.string()
     .matches(regx.details, "Кириллица или латинница от 2 до 20 знаков")
     .required("Введите имя персонажа");
 
 const checkbox = Yup.boolean()
-.oneOf([true], "Это поле обязательно");
+    .oneOf([true], "Это поле обязательно");
 
 export const schemas = {
     custom: Yup.object().shape({
         firstName,
         lastName,
-        // surName,
+        surName,
         email,
         birthDate,
         phone,
-        fandom,
-        character,
         checkbox,
+        art,
+        files: Yup.mixed()
+            .required("Прикрепите файл")
+            .test("is-file-too-big", "Файл превышает 10MB", (value) => {
+                if (!value) return false; // Если файлы не выбраны, то не пройдет валидацию
+                return Array.from(value).every((file) => file.size / 1024 / 1024 <= 10);
+            })
+            .test("is-file-of-correct-type", "Файл не поддерживается", (value) => {
+                if (!value) return false; // Если файлы не выбраны, то не пройдет валидацию
+                return Array.from(value).every((file) => {
+                    const type = file.type.split("/")[1];
+                    const validTypes = [
+                        "zip", "xml", "xhtml+xml", "plain", "svg+xml", "rtf", "pdf", "jpeg",
+                        "png", "jpg", "ogg", "json", "html", "gif", "csv"
+                    ];
+                    return validTypes.includes(type);
+                });
+            })
+
     }),
 };
 
@@ -77,7 +91,7 @@ export const initialValues = {
     email: "",
     birthDate: "",
     phone: "+7",
-    fandom: "",
-    character: "",
     checkbox: false,
+    art: "",
+    files: [],
 };

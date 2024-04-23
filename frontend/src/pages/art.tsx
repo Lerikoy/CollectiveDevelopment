@@ -1,20 +1,21 @@
-import { FunctionComponent, useCallback } from "react";
+import { FunctionComponent, useCallback, useRef } from "react";
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { initialValues, schemas } from "../components/form/validationCosplay.js";
+import { initialValues, schemas } from "../components/form/validationArt.js";
 import { Input } from "../components/form/input";
+import { FileUpload } from "../components/form/fileUpload";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
 
-export const Cosplay = () => {
-    
+export const Art = () => {
+    const fileRef = useRef(null);
     return(
         <div className={styles.div}>
             <Header/>
             <div className={styles.title}>
-                <b className={styles.b1}>ФОРМА РЕГИСТРАЦИИ НА КОНКУРС КОСПЛЕЯ</b>
+                <b className={styles.b1}>ФОРМА РЕГИСТРАЦИИ НА КОНКУРС РИСУНКОВ</b>
                 <p>Заполните все обязательные поля для подачи заявки на участие</p>
             </div>
    
@@ -105,17 +106,15 @@ export const Cosplay = () => {
 
                     <div className={styles.formDetails}>
                         <Input
-                            label = "Фэндом"
-                            name = "fandom"
-                            id = "fandom"
-                            placeholder= "Укажите фэндом"
+                            label = "Название сочинения"
+                            name = "write"
+                            id = "write"
+                            placeholder= "Укажите название сочинения"
                         />
-                        <Input
-                            label = "Имя персонажа"
-                            name = "character"
-                            id = "character"
-                            placeholder= "Укажите имя персонажа"
+                        <FileUpload
+                            fileRef={fileRef}
                         />
+
                     </div>
 
                     <div className={styles.section}>
@@ -155,4 +154,4 @@ export const Cosplay = () => {
     
 };
 
-export default Cosplay;
+export default Art;

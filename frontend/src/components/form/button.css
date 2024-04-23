@@ -1,9 +1,9 @@
 .button {
-    border-radius: var(--br-mini);
+    border-radius: var(--br-11xl);
     border: none;
     background-color: var(--color1);
     justify-content: flex-end;
-    padding: var(--padding-3xs) var(--padding-6xl);
+    padding: var(--padding-mini) var(--padding-11xl);
     cursor: pointer;
     color: var(--color-whitesmoke-100);
     display: flex;
@@ -13,6 +13,6 @@
     margin-right: auto;
 
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     margin-bottom: 8vh;
   }
