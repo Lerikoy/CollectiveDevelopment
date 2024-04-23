@@ -1,5 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from crud import (get_user, get_user_by_email, get_users, create_user_cosplay, create_user_picture, create_user_story,       
@@ -14,6 +15,18 @@ from pathlib import Path
 from typing import Union
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
