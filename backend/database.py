@@ -8,12 +8,22 @@ from sqlalchemy.orm import sessionmaker, relationship
 
 from config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
+import os
+
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 Base: DeclarativeMeta = declarative_base()
 
 engine = create_engine(DATABASE_URL)
 local_session_maker = sessionmaker(engine, expire_on_commit=False)
+
+
+if not os.path.exists("picture"):
+    os.makedirs("picture")
+
+if not os.path.exists("story"):
+    os.makedirs("story")
+
 
 def get_db():
     db = local_session_maker()
