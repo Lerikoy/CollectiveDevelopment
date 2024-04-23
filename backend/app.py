@@ -1,12 +1,13 @@
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from crud import (get_user, get_user_by_email, get_users, create_user_cosplay, create_user_picture, create_user_story,       
                   get_cosplay, get_picture, get_story, get_user_by_cosplay, get_user_by_picture, get_user_by_story,
                   create_only_cosplay, create_only_picture, create_only_story)
 from schemas import UserCreate, UserBase, CosplayBase, CosplayCreate, StoryBase, PictureBase
-from database import local_session_maker
+from database import get_db
 
 import aiofiles
 import json
@@ -15,18 +16,22 @@ from typing import Union
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 async def get_home():
     return {"data": "Hello world!"}
-
-
-def get_db():
-    db = local_session_maker()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.post("/cosplay/", response_model=Union[UserBase, CosplayBase])
