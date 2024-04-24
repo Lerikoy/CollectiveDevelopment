@@ -48,26 +48,26 @@ export const Write = () => {
                     <div className={styles.formPersonalData}>
                         <Input
                             label = "Фамилия"
-                            name = "lastName"
-                            id = "lastName"
+                            name = "last_name"
+                            id = "last_name"
                             placeholder = "Введите фамилию"
                         />
                         <Input
                             label = "Имя"
-                            name = "firstName"
-                            id = "firstName"
+                            name = "first_name"
+                            id = "first_name"
                             placeholder = "Введите имя"
                         />
                         <Input
                             label = "Отчество"
-                            name = "surName"
-                            id = "surName"
+                            name = "patronymic"
+                            id = "patronymic"
                             placeholder = "Введите отчество"
                         />
                         <Input
                             label = "Дата рождения"
-                            name = "birthDate"
-                            id = "birthDate"
+                            name = "date_of_birth"
+                            id = "date_of_birth"
                             placeholder = "ДД.ММ.ГГГГ"
                         />
                         <Input
@@ -78,8 +78,8 @@ export const Write = () => {
                         />
                         <Input
                             label = "Номер телефона"
-                            name = "phone"
-                            id = "phone"
+                            name = "Phone"
+                            id = "Phone"
                             placeholder = "Введите номер телефона"
                         />
                     </div>

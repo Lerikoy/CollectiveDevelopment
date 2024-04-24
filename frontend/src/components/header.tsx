@@ -28,7 +28,7 @@ const Header: FunctionComponent<HeaderType> = ({
       <div className={styles.menu} style={menuStyle}>
         <img className={styles.logoIcon} alt="" src="logo.png" />
         <a className={styles.text} href="/">Главная</a>
-        <a className={styles.text} href="/cosplay">Подать заявку на косплей</a>
+        <a className={styles.text} href="/cosplay">Ззаявка на косплей</a>
         <a
           className={styles.text}
           href={`https://wa.me/${whatsappNumber}`}

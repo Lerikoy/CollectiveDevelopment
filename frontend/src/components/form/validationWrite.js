@@ -5,20 +5,20 @@ import parse from "date-fns/parse";
 const regx = {
     name: /^[а-яА-Яa-zA-Z]{2,20}$/,
     email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]+$/,
-    birthDate: /^([0-9]{2}).([0-9]{2}).([0-9]{4})$/,
-    phone: /^(\+7)[0-9]{10}$/,
+    date_of_birth: /^([0-9]{2}).([0-9]{2}).([0-9]{4})$/,
+    Phone: /^(\+7)[0-9]{10}$/,
     details: /^([\w\d\s]{2,20})|([\d\s\u0400-\u04FF]{2,20})$/,
 };
 
-const firstName = Yup.string()
+const first_name = Yup.string()
     .matches(regx.name, "Кириллица латинница от 2 до 20 знаков")
     .required("Введите имя");
 
-const lastName = Yup.string()
+const last_name = Yup.string()
     .matches(regx.name, "Кириллица латинница от 2 до 20 знаков")
     .required("Введите фамилию");
 
-const surName = Yup.string()
+const patronymic = Yup.string()
     .matches(regx.name, "Кириллица и латинница от 2 до 20 знаков")
     .nullable()
     // .required("Введите отчество");
@@ -27,7 +27,7 @@ const email = Yup.string()
     .matches(regx.email, "Формат example@mail.com")
     .required("Введите почту");
 
-const birthDate = Yup.date()
+const date_of_birth = Yup.date()
     .transform(function (value, originalValue) {
         if (this.isType(value)) {
         return value;
@@ -39,8 +39,8 @@ const birthDate = Yup.date()
     .required("Введите дату рождения")
     .max("2006-08-13", "К участию допускаются лица страрше 18 лет");
 
-const phone = Yup.string()
-    .matches(regx.phone, "Формат +7XXXXXXXXXX")
+const Phone = Yup.string()
+    .matches(regx.Phone, "Формат +7XXXXXXXXXX")
     .required("Введите номер телефона");
 
 
@@ -55,12 +55,12 @@ const checkbox = Yup.boolean()
 
 export const schemas = {
     custom: Yup.object().shape({
-        firstName,
-        lastName,
-        surName,
+        first_name,
+        last_name,
+        patronymic,
         email,
-        birthDate,
-        phone,
+        date_of_birth,
+        Phone,
         checkbox,
         write,
         files: Yup.mixed()
@@ -85,12 +85,12 @@ export const schemas = {
 };
 
 export const initialValues = {
-    firstName: "",
-    lastName: "",
-    surName: "",
+    first_name: "",
+    last_name: "",
+    patronymic: "",
     email: "",
-    birthDate: "",
-    phone: "+7",
+    date_of_birth: "",
+    Phone: "+7",
     checkbox: false,
     write: "",
     files: [],

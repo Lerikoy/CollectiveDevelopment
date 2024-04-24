@@ -67,6 +67,10 @@ function App() {
       <Route path="/cosplay" element={<Cosplay />} />
        <Route path="/art" element={<Art />} />
        <Route path="/write" element={<Write />} />
+
+       {/* <Route path="/" element={
+            <Application />
+        } action={applicationAction} /> */}
     </Routes>
   );
 }

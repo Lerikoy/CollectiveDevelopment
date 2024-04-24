@@ -1,4 +1,3 @@
-import { FunctionComponent, useCallback } from "react";
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
@@ -7,9 +6,37 @@ import { initialValues, schemas } from "../components/form/validationCosplay.js"
 import { Input } from "../components/form/input";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
+import CurrentDateTime from '../components/form/currentDate';
+import axios from "axios";
 
 export const Cosplay = () => {
-    
+    async function postData() {
+        try {
+          const data = {
+            user: {
+              email: {},
+              first_name: {},
+              last_name: {},
+              patronymic: {},
+              Phone: {},
+              reqistered_time: <CurrentDateTime />,
+              date_of_birth: {},
+              consent_to_processing: true
+            },
+            cosplay: {
+              fandom: {},
+              name_character: {}
+            }
+          };
+      
+          const response = await axios.post('http://localhost:8000', data);
+          console.log(response.data);
+          window.location.href = '/';
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      
     return(
         <div className={styles.div}>
             <Header/>
@@ -21,7 +48,7 @@ export const Cosplay = () => {
             <Formik
                 initialValues={initialValues} 
                 validationSchema={schemas.custom}
-                onSubmit={() => console.log("Success")} //отправка на сервер
+                onSubmit={() => postData()}  //отправка на сервер
             >
                 <Form >
                     <div className={styles.section}>
@@ -47,26 +74,26 @@ export const Cosplay = () => {
                     <div className={styles.formPersonalData}>
                         <Input
                             label = "Фамилия"
-                            name = "lastName"
-                            id = "lastName"
+                            name = "last_name"
+                            id = "last_name"
                             placeholder = "Введите фамилию"
                         />
                         <Input
                             label = "Имя"
-                            name = "firstName"
-                            id = "firstName"
+                            name = "first_name"
+                            id = "first_name"
                             placeholder = "Введите имя"
                         />
                         <Input
                             label = "Отчество"
-                            name = "surName"
-                            id = "surName"
+                            name = "patronymic"
+                            id = "patronymic"
                             placeholder = "Введите отчество"
                         />
                         <Input
                             label = "Дата рождения"
-                            name = "birthDate"
-                            id = "birthDate"
+                            name = "date_of_birth"
+                            id = "date_of_birth"
                             placeholder = "ДД.ММ.ГГГГ"
                         />
                         <Input
@@ -77,8 +104,8 @@ export const Cosplay = () => {
                         />
                         <Input
                             label = "Номер телефона"
-                            name = "phone"
-                            id = "phone"
+                            name = "Phone"
+                            id = "Phone"
                             placeholder = "Введите номер телефона"
                         />
                     </div>
@@ -112,8 +139,8 @@ export const Cosplay = () => {
                         />
                         <Input
                             label = "Имя персонажа"
-                            name = "character"
-                            id = "character"
+                            name = "name_character"
+                            id = "name_character"
                             placeholder= "Укажите имя персонажа"
                         />
                     </div>
@@ -139,19 +166,20 @@ export const Cosplay = () => {
                     </div>
 
                     <Checkbox
-                        id="checkbox"
+                        id="consent_to_processing"
                         label="Я даю согласие на обработку персональных данных и принимаю положение конкурса YKT GEEK FEST"
-                        name="checkbox"
+                        name="consent_to_processing"
                         ></Checkbox>
 
                     <Button>Подать заявку</Button>
                 </Form>
-                    
             </Formik>
         
 
         </div>
     );
+
+
     
 };
 

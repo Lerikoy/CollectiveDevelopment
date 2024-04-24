@@ -117,7 +117,7 @@ const HomePage: FunctionComponent = () => {
                     buttonClick={buttonArtClick}
                 />
             </div>
-            {/* <Footer logo={"45y4y"} phoneNumber={"97890059"} email={"4ty4y"} externalLink={"4yt4"} /> */}
+            {/* <Footer logo={"45y4y"} PhoneNumber={"97890059"} email={"4ty4y"} externalLink={"4yt4"} /> */}
         </div>
     );
 };
