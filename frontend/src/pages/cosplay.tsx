@@ -1,35 +1,34 @@
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikValues } from "formik";
 import { initialValues, schemas } from "../components/form/validationCosplay.js";
 import { Input } from "../components/form/input";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
-import CurrentDateTime from '../components/form/currentDate';
 import axios from "axios";
 
 export const Cosplay = () => {
-    async function postData() {
+    const postData = async (values: FormikValues) => {
         try {
           const data = {
             user: {
-              email: {},
-              first_name: {},
-              last_name: {},
-              patronymic: {},
-              Phone: {},
-              reqistered_time: <CurrentDateTime />,
-              date_of_birth: {},
+              email: values.email,
+              first_name: values.first_name,
+              last_name: values.last_name,
+              patronymic: values.patronymic,
+              Phone: values.Phone,
+              reqistered_time: new Date(),
+              date_of_birth: values.date_of_birth,
               consent_to_processing: true
             },
             cosplay: {
-              fandom: {},
-              name_character: {}
+              fandom: values.fandom,
+              name_character: values.name_character
             }
           };
       
-          const response = await axios.post('http://localhost:8000', data);
+          const response = await axios.post('http://localhost:8000/cosplay', data);
           console.log(response.data);
           window.location.href = '/';
         } catch (error) {
@@ -48,7 +47,7 @@ export const Cosplay = () => {
             <Formik
                 initialValues={initialValues} 
                 validationSchema={schemas.custom}
-                onSubmit={() => postData()}  //отправка на сервер
+                onSubmit={(values) => postData(values)}  //отправка на сервер
             >
                 <Form >
                     <div className={styles.section}>
@@ -94,7 +93,7 @@ export const Cosplay = () => {
                             label = "Дата рождения"
                             name = "date_of_birth"
                             id = "date_of_birth"
-                            placeholder = "ДД.ММ.ГГГГ"
+                            placeholder = "ГГГГ-ММ-ДД"
                         />
                         <Input
                             label = "Электронная почта"

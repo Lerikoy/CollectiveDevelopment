@@ -68,7 +68,7 @@ export const Write = () => {
                             label = "Дата рождения"
                             name = "date_of_birth"
                             id = "date_of_birth"
-                            placeholder = "ДД.ММ.ГГГГ"
+                            placeholder = "ГГГГ-ММ-ДД"
                         />
                         <Input
                             label = "Электронная почта"
@@ -106,10 +106,10 @@ export const Write = () => {
 
                     <div className={styles.formDetails}>
                         <Input
-                            label = "Название рисунка"
+                            label = "Название сочинения"
                             name = "art"
                             id = "art"
-                            placeholder= "Укажите название рисунка"
+                            placeholder= "Укажите название сочинения"
                         />
                         <FileUpload
                             fileRef={fileRef}

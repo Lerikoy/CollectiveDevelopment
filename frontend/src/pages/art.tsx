@@ -1,16 +1,67 @@
-import { FunctionComponent, useCallback, useRef } from "react";
+import { useRef } from "react";
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, FormikValues } from "formik";
 import { initialValues, schemas } from "../components/form/validationArt.js";
 import { Input } from "../components/form/input";
 import { FileUpload } from "../components/form/fileUpload";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
+import axios from "axios";
 
 export const Art = () => {
     const fileRef = useRef(null);
+
+
+
+    const postData = async (values: FormikValues) => {
+            // Создание экземпляра FormData
+        const formData = new FormData();
+    //     let dateOfBirth = values.date_of_birth;
+    //     if (typeof dateOfBirth === 'string') {
+    //     dateOfBirth = new Date(dateOfBirth);
+    // }
+
+        // Добавление пользовательских данных в формате строки JSON
+        formData.append('user_and_picture', JSON.stringify({
+            user: {
+                email: values.email,
+                first_name: values.first_name,
+                last_name: values.last_name,
+                patronymic: values.patronymic,
+                Phone: values.Phone,  // Исправлено на 'phone' для соответствия обычным соглашениям о названии
+                reqistered_time: new Date(),  // Форматирование даты в строку ISO для корректной передачи
+                date_of_birth: values.date_of_birth,  // Предполагается, что это объект Date
+                consent_to_processing: true
+            },
+            picture: {
+                name: values.name,
+            }
+        }));
+
+        // Добавление файла
+        if (values.files && values.files.length > 0) {
+            formData.append('file', values.files[0]);  // Добавление первого файла, предполагая, что 'files' это массив файлов
+        }
+
+        // Настройка запроса
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'  // Необходимый заголовок для работы с multipart/form-data
+            }
+        };
+
+        // Отправка запроса
+        try {
+            const response = await axios.post('http://localhost:8000/picture', formData, config);
+            console.log(response.data);
+            window.location.href = '/';  // Переадресация после успешной отправки
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return(
         <div className={styles.div}>
             <Header/>
@@ -22,7 +73,8 @@ export const Art = () => {
             <Formik
                 initialValues={initialValues} 
                 validationSchema={schemas.custom}
-                onSubmit={() => console.log("Success")} //отправка на сервер
+                // onSubmit={(values) => postData(values)} //отправка на сервер
+                onSubmit={(values) => postData(values)}
             >
                 <Form >
                     <div className={styles.section}>
@@ -68,7 +120,7 @@ export const Art = () => {
                             label = "Дата рождения"
                             name = "date_of_birth"
                             id = "date_of_birth"
-                            placeholder = "ДД.ММ.ГГГГ"
+                            placeholder = "ГГГГ-ММ-ДД"
                         />
                         <Input
                             label = "Электронная почта"
@@ -106,10 +158,10 @@ export const Art = () => {
 
                     <div className={styles.formDetails}>
                         <Input
-                            label = "Название сочинения"
-                            name = "write"
-                            id = "write"
-                            placeholder= "Укажите название сочинения"
+                            label = "Название рисунка"
+                            name = "name"
+                            id = "name"
+                            placeholder= "Укажите название рисунка"
                         />
                         <FileUpload
                             fileRef={fileRef}
@@ -138,9 +190,9 @@ export const Art = () => {
                     </div>
 
                     <Checkbox
-                        id="checkbox"
+                        id="consent_to_processing"
                         label="Я даю согласие на обработку персональных данных и принимаю положение конкурса YKT GEEK FEST"
-                        name="checkbox"
+                        name="consent_to_processing"
                         ></Checkbox>
 
                     <Button>Подать заявку</Button>
