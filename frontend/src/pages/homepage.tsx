@@ -42,7 +42,8 @@ const HomePage: FunctionComponent = () => {
             <img className={styles.ellipse2} alt="" src="/ellipse2.svg" />
             <img className={styles.image} alt="" src="/main_image.png" />
             <div className={styles.title}>
-                <b className={styles.b1}>ФЕСТИВАЛЬ</b>
+                {/* <b className={styles.b1}>ФЕСТИВАЛЬ</b> */}
+                <img  className={styles.festImage} alt="" src="/fest.png" />
                 <b className={styles.b}>
                     <p className={styles.p}>ПОПУЛЯРНОЙ</p>
                     <p className={styles.p}>КУЛЬТУРЫ</p>

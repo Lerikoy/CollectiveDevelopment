@@ -8,6 +8,9 @@ import { Input } from "../components/form/input";
 import { FileUpload } from "../components/form/fileUpload";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
+import  Section1  from "../components/section1";
+import  Section2  from "../components/section2";
+import  Section3  from "../components/section3";
 import axios from "axios";
 
 export const Write = () => {
@@ -42,7 +45,7 @@ export const Write = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8000/story', formData, config);
+            const response = await axios.post('http://10.131.0.30:2112/story', formData, config);
             console.log(response.data);
             window.location.href = '/'; 
         } catch (error) {
@@ -65,25 +68,7 @@ export const Write = () => {
                 onSubmit={(values) => postData(values)} //отправка на сервер
             >
                 <Form >
-                    <div className={styles.section}>
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>{`1 `}</div>
-                        </div>
-                        <div className={styles.sectionText}>Личные данные</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>2</div>
-                        </div>
-                        <div className={styles.sectionText}>Детали косплея</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>3</div>
-                        </div>
-                        <div className={styles.sectionText}>Согласие на обработку</div>
-                    </div>
+                    <Section1 />
 
                     <div className={styles.formPersonalData}>
                         <Input
@@ -124,25 +109,7 @@ export const Write = () => {
                         />
                     </div>
 
-                    <div className={styles.section}>
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>{`1 `}</div>
-                        </div>
-                        <div className={styles.sectionText}>Личные данные</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>2</div>
-                        </div>
-                        <div className={styles.sectionText}>Детали косплея</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>3</div>
-                        </div>
-                        <div className={styles.sectionText}>Согласие на обработку</div>
-                    </div>
+                    <Section2 />
 
                     <div className={styles.formDetails}>
                         <Input
@@ -157,25 +124,7 @@ export const Write = () => {
 
                     </div>
 
-                    <div className={styles.section}>
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>{`1 `}</div>
-                        </div>
-                        <div className={styles.sectionText}>Личные данные</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>2</div>
-                        </div>
-                        <div className={styles.sectionText}>Детали косплея</div>
-                        <div className={styles.line} />
-                        <div className={styles.numberParent}>
-                            <div className={styles.circle} />
-                            <div className={styles.num}>3</div>
-                        </div>
-                        <div className={styles.sectionText}>Согласие на обработку</div>
-                    </div>
+                    <Section3 />
 
                     <Checkbox
                         id="consent_to_processing"

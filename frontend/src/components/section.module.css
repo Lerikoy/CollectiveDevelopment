@@ -1,0 +1,116 @@
+.sectionMain{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-6xl);
+    height: 15vh;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 3vh;
+}
+
+.numberParent{
+    width: 35px;
+    position: relative;
+    height: 35px;
+}
+
+.circle{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-darkgray);
+    box-sizing: border-box;
+}
+
+.num{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    line-height: 125%;
+    font-weight: 600;
+}
+
+.sectionText{
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    color: var(--color-darkgray);
+    text-align: left;
+}
+
+.line{
+    width: 100px;
+    position: relative;
+    border-top: 2px solid var(--color-darkgray);
+    box-sizing: border-box;
+    height: 1px;
+}
+
+
+.circle1{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid var(--color);
+}
+.sectionText1{
+    color: var(--color);
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    text-align: left;
+}
+
+.circle2{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid var(--color);
+}
+.sectionText2{
+    color: var(--color);
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    text-align: left;
+}
+
+.circle3{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid var(--color);
+}
+.sectionText3{
+    color: var(--color);
+    position: relative;
+    line-height: 125%;
+    font-weight: 600;
+    text-align: left;
+}
+
