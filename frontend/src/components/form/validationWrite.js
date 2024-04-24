@@ -45,11 +45,11 @@ const Phone = Yup.string()
 
 
 
-const write = Yup.string()
+const name = Yup.string()
     .matches(regx.details, "Кириллица или латинница от 2 до 20 знаков")
     .required("Введите имя персонажа");
 
-const checkbox = Yup.boolean()
+const consent_to_processing = Yup.boolean()
     .oneOf([true], "Это поле обязательно");
 
 export const schemas = {
@@ -60,8 +60,8 @@ export const schemas = {
         email,
         date_of_birth,
         Phone,
-        checkbox,
-        write,
+        consent_to_processing,
+        name,
         files: Yup.mixed()
             .required("Прикрепите файл")
             .test("is-file-too-big", "Файл превышает 10MB", (value) => {
@@ -90,7 +90,7 @@ export const initialValues = {
     email: "",
     date_of_birth: "",
     Phone: "+7",
-    checkbox: false,
-    write: "",
+    consent_to_processing: false,
+    name: "",
     files: [],
 };

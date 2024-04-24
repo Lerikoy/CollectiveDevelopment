@@ -13,26 +13,17 @@ import axios from "axios";
 export const Art = () => {
     const fileRef = useRef(null);
 
-
-
     const postData = async (values: FormikValues) => {
-            // Создание экземпляра FormData
         const formData = new FormData();
-    //     let dateOfBirth = values.date_of_birth;
-    //     if (typeof dateOfBirth === 'string') {
-    //     dateOfBirth = new Date(dateOfBirth);
-    // }
-
-        // Добавление пользовательских данных в формате строки JSON
         formData.append('user_and_picture', JSON.stringify({
             user: {
                 email: values.email,
                 first_name: values.first_name,
                 last_name: values.last_name,
                 patronymic: values.patronymic,
-                Phone: values.Phone,  // Исправлено на 'phone' для соответствия обычным соглашениям о названии
-                reqistered_time: new Date(),  // Форматирование даты в строку ISO для корректной передачи
-                date_of_birth: values.date_of_birth,  // Предполагается, что это объект Date
+                Phone: values.Phone, 
+                reqistered_time: new Date(),  
+                date_of_birth: values.date_of_birth, 
                 consent_to_processing: true
             },
             picture: {
@@ -40,23 +31,20 @@ export const Art = () => {
             }
         }));
 
-        // Добавление файла
         if (values.files && values.files.length > 0) {
-            formData.append('file', values.files[0]);  // Добавление первого файла, предполагая, что 'files' это массив файлов
+            formData.append('file', values.files[0]);  
         }
 
-        // Настройка запроса
         const config = {
             headers: {
-                'Content-Type': 'multipart/form-data'  // Необходимый заголовок для работы с multipart/form-data
+                'Content-Type': 'multipart/form-data' 
             }
         };
 
-        // Отправка запроса
         try {
             const response = await axios.post('http://localhost:8000/picture', formData, config);
             console.log(response.data);
-            window.location.href = '/';  // Переадресация после успешной отправки
+            window.location.href = '/'; 
         } catch (error) {
             console.error(error);
         }

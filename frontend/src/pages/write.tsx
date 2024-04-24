@@ -2,15 +2,55 @@ import { FunctionComponent, useCallback, useRef } from "react";
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, FormikValues} from "formik";
 import { initialValues, schemas } from "../components/form/validationWrite.js";
 import { Input } from "../components/form/input";
 import { FileUpload } from "../components/form/fileUpload";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
+import axios from "axios";
 
 export const Write = () => {
     const fileRef = useRef(null);
+
+    const postData = async (values: FormikValues) => {
+        const formData = new FormData();
+        formData.append('user_and_story', JSON.stringify({
+            user: {
+                email: values.email,
+                first_name: values.first_name,
+                last_name: values.last_name,
+                patronymic: values.patronymic,
+                Phone: values.Phone, 
+                reqistered_time: new Date(),  
+                date_of_birth: values.date_of_birth, 
+                consent_to_processing: true
+            },
+            story: {
+                name: values.name,
+            }
+        }));
+
+        if (values.files && values.files.length > 0) {
+            formData.append('file', values.files[0]);  
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data' 
+            }
+        };
+
+        try {
+            const response = await axios.post('http://localhost:8000/story', formData, config);
+            console.log(response.data);
+            window.location.href = '/'; 
+        } catch (error) {
+            console.error(error);
+        }
+    };    
+    
+    
     return(
         <div className={styles.div}>
             <Header/>
@@ -22,7 +62,7 @@ export const Write = () => {
             <Formik
                 initialValues={initialValues} 
                 validationSchema={schemas.custom}
-                onSubmit={() => console.log("Success")} //отправка на сервер
+                onSubmit={(values) => postData(values)} //отправка на сервер
             >
                 <Form >
                     <div className={styles.section}>
@@ -107,8 +147,8 @@ export const Write = () => {
                     <div className={styles.formDetails}>
                         <Input
                             label = "Название сочинения"
-                            name = "art"
-                            id = "art"
+                            name = "name"
+                            id = "name"
                             placeholder= "Укажите название сочинения"
                         />
                         <FileUpload
@@ -138,9 +178,9 @@ export const Write = () => {
                     </div>
 
                     <Checkbox
-                        id="checkbox"
+                        id="consent_to_processing"
                         label="Я даю согласие на обработку персональных данных и принимаю положение конкурса YKT GEEK FEST"
-                        name="checkbox"
+                        name="consent_to_processing"
                         ></Checkbox>
 
                     <Button>Подать заявку</Button>
