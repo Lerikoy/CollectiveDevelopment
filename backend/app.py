@@ -46,7 +46,7 @@ def create_cosplay(user: UserCreate, cosplay: CosplayCreate, db: Session = Depen
     return create_user_cosplay(db=db, user=user, cosplay=cosplay)
 
 
-@app.post("/picture/", response_model=UserBase)
+@app.post("/picture/")
 async def create_picture(user_and_picture: Union[dict, str], file: UploadFile = File(...), db: Session = Depends(get_db)):
     if isinstance(user_and_picture, str):
         user_and_picture = json.loads(user_and_picture)
@@ -77,7 +77,7 @@ async def create_picture(user_and_picture: Union[dict, str], file: UploadFile = 
     return create_user_picture(db=db, user=user_data, picture=picture_data)
 
 
-@app.post("/story/", response_model=UserBase)
+@app.post("/story/")
 async def create_story(user_and_story: Union[dict, str], file: UploadFile = File(...), db: Session = Depends(get_db)):
     if isinstance(user_and_story, str):
         user_and_story = json.loads(user_and_story)
