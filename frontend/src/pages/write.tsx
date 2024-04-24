@@ -1,54 +1,28 @@
+import { FunctionComponent, useCallback, useRef } from "react";
 import Header from "../components/header";
 import styles from "./cosplay.module.css";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { initialValues, schemas } from "../components/form/validationCosplay.js";
+import { initialValues, schemas } from "../components/form/validationWrite.js";
 import { Input } from "../components/form/input";
+import { FileUpload } from "../components/form/fileUpload";
 import { Button } from "../components/form/button";
 import { Checkbox } from "../components/form/checkbox";
-import CurrentDateTime from '../components/form/currentDate';
-import axios from "axios";
 
-export const Cosplay = () => {
-    async function postData() {
-        try {
-          const data = {
-            user: {
-              email: {},
-              first_name: {},
-              last_name: {},
-              patronymic: {},
-              Phone: {},
-              reqistered_time: <CurrentDateTime />,
-              date_of_birth: {},
-              consent_to_processing: true
-            },
-            cosplay: {
-              fandom: {},
-              name_character: {}
-            }
-          };
-      
-          const response = await axios.post('http://localhost:8000', data);
-          console.log(response.data);
-          window.location.href = '/';
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      
+export const Write = () => {
+    const fileRef = useRef(null);
     return(
         <div className={styles.div}>
             <Header/>
             <div className={styles.title}>
-                <b className={styles.b1}>ФОРМА РЕГИСТРАЦИИ НА КОНКУРС КОСПЛЕЯ</b>
+                <b className={styles.b1}>ФОРМА РЕГИСТРАЦИИ НА КОНКУРС ПИСАТЕЛЕЙ</b>
                 <p>Заполните все обязательные поля для подачи заявки на участие</p>
             </div>
    
             <Formik
                 initialValues={initialValues} 
                 validationSchema={schemas.custom}
-                onSubmit={() => postData()}  //отправка на сервер
+                onSubmit={() => console.log("Success")} //отправка на сервер
             >
                 <Form >
                     <div className={styles.section}>
@@ -132,17 +106,15 @@ export const Cosplay = () => {
 
                     <div className={styles.formDetails}>
                         <Input
-                            label = "Фэндом"
-                            name = "fandom"
-                            id = "fandom"
-                            placeholder= "Укажите фэндом"
+                            label = "Название рисунка"
+                            name = "art"
+                            id = "art"
+                            placeholder= "Укажите название рисунка"
                         />
-                        <Input
-                            label = "Имя персонажа"
-                            name = "name_character"
-                            id = "name_character"
-                            placeholder= "Укажите имя персонажа"
+                        <FileUpload
+                            fileRef={fileRef}
                         />
+
                     </div>
 
                     <div className={styles.section}>
@@ -166,21 +138,20 @@ export const Cosplay = () => {
                     </div>
 
                     <Checkbox
-                        id="consent_to_processing"
+                        id="checkbox"
                         label="Я даю согласие на обработку персональных данных и принимаю положение конкурса YKT GEEK FEST"
-                        name="consent_to_processing"
+                        name="checkbox"
                         ></Checkbox>
 
                     <Button>Подать заявку</Button>
                 </Form>
+                    
             </Formik>
         
 
         </div>
     );
-
-
     
 };
 
-export default Cosplay;
+export default Write;

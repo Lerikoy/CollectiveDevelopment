@@ -2,14 +2,26 @@ import { FunctionComponent, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Competitions from "../components/competitions";
 import Header from "../components/header";
-// import Footer from "../components/footer";
-// import ContainerWrapper from "../components/container-wrapper"; //рисунки
 import styles from "./homepage.module.css";
 
 const HomePage: FunctionComponent = () => {
+    const navigate = useNavigate();
+
+    const buttonWriteClick = useCallback(() => {
+      navigate("/write");
+    }, [navigate]);
+  
+    const buttonArtClick = useCallback(() => {
+      navigate("/art");
+    }, [navigate]);
+  
+    const buttonCosplayClick = useCallback(() => {
+      navigate("/cosplay");
+    }, [navigate]);
+    
     return(
         <div className={styles.div}>
-            <Header/>
+            <Header />
             <div className={styles.lineParent}>
                 <div className={styles.lineChild} />
                 <div className={styles.lineChild} />
@@ -88,36 +100,24 @@ const HomePage: FunctionComponent = () => {
                     title="КОНКУРСЫ ДЛЯ КОСПЛЕЕРОВ"
                     desc="Участвуй в одном из трех категорий и вдохнови других своим креативом!"
                     button="unset"
-                    // onFrameContainer13Click={onFrameContainer1Click}
+                    buttonClick={buttonCosplayClick}
                 />
                 <Competitions
                     cover="/cover_write.jpg"
                     title="КОНКУРС РАССКАЗОВ"
                     desc="Открой новые горизонты в жанре научной фантастики с нами"
                     button="unset"
-                    // onFrameContainer13Click={onFrameContainer12Click}
+                    buttonClick={buttonWriteClick}
                 />
                 <Competitions
                     cover="/cover_art.jpg"
                     title="КОНКУРС РИСУНОКОВ"
                     desc="Творческий конкурс для традиционных и диджитал художников"
                     button="unset"
-                    // onFrameContainer13Click={onFrameContainer13Click}
+                    buttonClick={buttonArtClick}
                 />
             </div>
-            <div className={styles.galleryTitle}>
-                <p className={styles.p}>УЧАСТНИКИ <br />КОНКУРСА РИСУНКОВ</p>
-            </div>
-            
-            {/* <div className={styles.galleryParent}>
-                <div className={styles.slider}>
-                    <div className={styles.slideTrack}>
-                        
-                        <img className={styles.slides} src="/picture/Rectangle 1.jpg"/>
-                    </div>
-                </div>
-            </div> */}
-
+            {/* <Footer logo={"45y4y"} PhoneNumber={"97890059"} email={"4ty4y"} externalLink={"4yt4"} /> */}
         </div>
     );
 };
