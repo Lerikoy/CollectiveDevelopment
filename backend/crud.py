@@ -71,7 +71,7 @@ def create_only_cosplay(db: Session, cosplay: CosplayCreate, user_id: int):
 
 
 def create_only_picture(db: Session, picture: PictureCreate, user_id: int):
-    db_item = Picture(**picture.dict(), user_id=user_id)
+    db_item = Picture(**picture, user_id=user_id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
@@ -79,7 +79,7 @@ def create_only_picture(db: Session, picture: PictureCreate, user_id: int):
 
 
 def create_only_story(db: Session, story: StoryCreate, user_id: int):
-    db_item = Story(**story.dict(), user_id=user_id)
+    db_item = Story(**story, user_id=user_id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
