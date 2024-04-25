@@ -1,5 +1,6 @@
 import * as Yup from "yup";
-import parse from "date-fns/parse";
+// import parse from "date-fns/parse";
+import { parse } from "date-fns";
 
 
 const regx = {

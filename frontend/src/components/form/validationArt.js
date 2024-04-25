@@ -73,7 +73,7 @@ export const schemas = {
                     const type = file.type.split("/")[1];
                     const validTypes = [
                         "zip", "xml", "xhtml+xml", "plain", "svg+xml", "rtf", "pdf", "jpeg",
-                        "png", "jpg", "ogg", "json", "html", "gif", "csv"
+                        "png", "jpg", "ogg", "json", "html", "gif", "csv", "vnd.openxmlformats-officedocument.wordprocessingml.document"
                     ];
                     return validTypes.includes(type);
                 });
