@@ -45,7 +45,7 @@ export const Write = () => {
         };
 
         try {
-            const response = await axios.post('http://10.131.0.30:2112/story', formData, config);
+            const response = await axios.post('http://localhost:8000/story', formData, config);
             console.log(response.data);
             window.location.href = '/'; 
         } catch (error) {

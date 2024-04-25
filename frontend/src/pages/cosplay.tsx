@@ -31,7 +31,7 @@ export const Cosplay = () => {
             }
           };
       
-          const response = await axios.post('http://10.131.0.30:2112/cosplay', data);
+          const response = await axios.post('http://localhost:8000/cosplay', data);
           console.log(response.data);
           window.location.href = '/';
         } catch (error) {

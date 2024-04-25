@@ -45,7 +45,7 @@ export const Art = () => {
         };
 
         try {
-            const response = await axios.post('http://10.131.0.30:2112/picture', formData, config);
+            const response = await axios.post('http://localhost:8000/picture', formData, config);
             console.log(response.data);
             window.location.href = '/'; 
         } catch (error) {
